@@ -271,6 +271,12 @@ def sanitize(obj, message: str):
 def main() -> int:
     setup_logging()
     load_dotenv(ROOT / ".env")
+    # 幂等保护：产物已存在时默认跳过（run_all 回归友好），
+    # 设置 EXTRACT_FORCE=1 可强制重跑全量 LLM 抽取
+    if OUT_PATH.exists() and not os.environ.get("EXTRACT_FORCE"):
+        logger.info("[跳过] %s 已存在（默认不重复付费/耗时）。"
+                    "如需强制重跑请设置环境变量 EXTRACT_FORCE=1", OUT_PATH.name)
+        return 0
     t0 = time.time()
     logger.info("===== M4 差评抽取启动（batch=%d, workers=%d, budget=$%.2f）=====",
                 BATCH_SIZE, MAX_WORKERS, BUDGET_USD)

@@ -12,29 +12,41 @@
 
 ## 🤖 AI 工具
 
-### 工具 1：（例如 Claude / ChatGPT / Copilot / Cursor）
+### 工具 1：CodeBuddy（IDE 智能体，Claude 模型）
 
-- **版本/型号**：（例如 Claude Opus 4.7 / GPT-4 / GitHub Copilot ...）
-- **解决了什么问题**：
-- **使用场景**：
-- **替代方案**：（如果不用这个 AI，你会怎么办？）
+- **版本/型号**：CodeBuddy IDE 内置智能体，Claude 系列（2026-11 使用）
+- **解决了什么问题**：全部模块的代码与文档初稿，包括 Q1 探查脚本、Q2 三条 SQL 与灌库脚本、Q3 的 8 函数 ETL 管道、Q4 的 LLM 抽取流水线、Q5 架构方案、REFLECTION 与 AI_LOG 的组织
+- **使用场景**：本卷协作模式是"AI 产出初稿，人负责验证与拍板"。每个模块都经历了探查、实现、试跑、修复的循环，全部 10 段对话原文按题号归档在 AI_LOG.md
+- **替代方案**：ChatGPT 或 Cursor 加人工拼接。本卷选 IDE 智能体的原因是它能直接读写工作区文件并执行命令，验证环节（跑脚本、查数据库）不需要复制粘贴
 
-### 工具 2：
+### 工具 2：智谱 GLM-4-Flash
 
-- **版本/型号**：
-- **解决了什么问题**：
-- **使用场景**：
-- **替代方案**：
+- **版本/型号**：glm-4-flash（免费档，2026-11）
+- **解决了什么问题**：Q4 的 22,754 条差评结构化抽取，输出严格 JSON
+- **使用场景**：批量 16 条打包加 id 对齐，实际 1,030 次请求完成全量抽取，实际花费 $0，影子成本 $2.03
+- **替代方案**：DeepSeek-V3（影子成本折算基准，全量约 $2）；GPT-4o（约 $18.5，超预算 6 倍）
 
 ---
 
 ## 💻 IDE / 开发环境
 
-### 工具 1：（例如 VS Code / PyCharm / Jupyter Notebook ...）
+### 工具 1：CodeBuddy IDE（VS Code 内核）
 
-- **解决了什么问题**：
-- **使用场景**：
-- **替代方案**：
+- **解决了什么问题**：编码、文件管理、终端、Git 操作一体化
+- **使用场景**：模块目录组织、编辑 `.sql` 与 `.md`、执行 Python 与 PowerShell 命令、后台任务管理（Q4 全量抽取跑了 2.83 小时）
+- **替代方案**：VS Code 加 Copilot，功能等价，区别在智能体的文件读写与执行权限
+
+### 工具 2：Git + GitHub（Fork 仓库）
+
+- **解决了什么问题**：版本管理与交付。每个模块单独 commit，全程 17+ 个提交，迭代过程可追溯
+- **使用场景**：`git rm --cached` 误提交的大文件（LLM 缓存）、推送 fork 仓库
+- **替代方案**：无
+
+### 工具 3：PowerShell 5.1（Windows）
+
+- **解决了什么问题**：进程管理（后台启动长任务、KILL 遗留查询）、日志轮询、文件清理
+- **使用场景**：Q2.4 基准实验的进程控制、run_all 全流程回归的后台执行
+- **替代方案**：WSL bash。本机 PowerShell 5.1 不支持 `??` 运算符，这类场景改用 Python 脚本规避
 
 ---
 
@@ -44,61 +56,62 @@
 
 | 库 | 版本 | 用途 | 替代方案 |
 |----|------|------|----------|
-| pandas | | | |
-| numpy | | | |
-| ... | | | |
+| pandas | 3.1.1 | 全部数据探查、清洗、RFM、抽取输出 | polars（性能更好，团队主栈是 pandas） |
+| numpy | 2.5.4 | 数值计算（随 pandas 使用） | — |
+| pyarrow | 26.0.1 | parquet 读写（Q3 三个产物） | fastparquet |
+| tabulate | 0.10.0 | `to_markdown` 依赖（Q1 质量报告） | 手写 markdown 拼接 |
 
 ### 数据库 / SQL（强制使用 MySQL 8.0+）
 
 | 库 | 版本 | 用途 | 替代方案 |
 |----|------|------|----------|
-| pymysql | | MySQL 8 驱动 | mysqlclient（需编译） |
-| sqlalchemy | | 用 to_sql 灌数据 / 执行查询 | 直接用 pymysql cursor |
-| cryptography | | MySQL 8 caching_sha2_password 认证 | 改 MySQL 用户改用 mysql_native_password |
-| ... | | | |
+| pymysql | 1.2.3 | MySQL 8 驱动 | mysqlclient（需编译） |
+| sqlalchemy | 2.1.8 | to_sql 灌数据 / 执行查询 / 连接管理 | 直接用 pymysql cursor |
+| cryptography | 50.0.2 | MySQL 8 caching_sha2_password 认证 | 改用户用 mysql_native_password |
 
 ### LLM / API
 
 | 库 | 版本 | 用途 | 替代方案 |
 |----|------|------|----------|
-| openai | | | |
-| anthropic | | | |
-| ... | | | |
+| openai | 3.46.0 | OpenAI 兼容协议调用智谱端点（base_url 切换） | httpx 手写请求（失去重试与类型化响应） |
 
 ### 其他
 
 | 库 | 版本 | 用途 | 替代方案 |
 |----|------|------|----------|
-| | | | |
+| python-dotenv | 1.2.4 | 加载 `.env`（MySQL 与 LLM 凭据，凭据不入库） | 手写 os.environ 注入 |
+| kagglehub | 1.0.3 | 下载 Olist 与 Online Retail II 数据集（run_all 首步） | Kaggle CLI 或手动下载 |
 
 ---
 
 ## 🛠️ 数据库工具
 
-### 工具 1：（例如 DBeaver / DataGrip / TablePlus ...）
+### 工具 1：MySQL 8.0.23（Windows 原生服务 MySQL80）
 
-- **解决了什么问题**：
-- **使用场景**：
-- **替代方案**：
+- **解决了什么问题**：Q2 全部 SQL 与 Q2.4 性能实验。本机已有服务在运行，省去了 Docker 启动成本，题面强制的"MySQL 8.0+"由 `SELECT VERSION()` 核实
+- **使用场景**：9 张表灌库（1,550,922 行）、三条分析 SQL、EXPLAIN 执行计划、SHOW FULL PROCESSLIST 排查元数据锁
+- **替代方案**：Docker `mysql:8`（版本可固定到最新 8.0.x，隔离性更好）。我选原生服务的理由是零等待且版本 8.0.23 完全满足题面方言要求，权衡已记录在 AI_LOG 对话 5
+
+### 工具 2：mysql.exe 命令行客户端
+
+- **解决了什么问题**：快速核对表结构与单条查询结果
+- **使用场景**：验证灌库行数、SHOW COLUMNS 核对列类型
+- **替代方案**：DBeaver（图形化，更适合交互式探索，本卷由 AI 智能体代劳了大部分探查）
 
 ---
 
 ## 🔍 调试与分析工具
 
-> 比如 line_profiler、memory_profiler、pytest 等
-
-（请填写）
+Q2.4 排障组合是本卷最有含金量的调试经历：`SHOW FULL PROCESSLIST` 定位遗留查询的元数据锁，`KILL` 清场后配合 `max_execution_time` 封顶重做有界实验，EXPLAIN 对比加索引前后的执行计划差异（hash join 变逐行 ref，恶化 34 倍）。Q3 与 Q4 的验证依赖 logging 全程落盘加运行后人工抽查 parquet 与 JSON 样例，Q4 的 `eval_sample.py` 把分层抽样做成可复现脚本（seed 固定）。
 
 ---
 
 ## 🌐 在线资源 / 文档
 
-> 不需要列出每一次搜索，只列那些对你帮助最大的资源
-
-例如：
-- **Pandas 官方文档**：用于查 `merge_asof` 的精确用法（Q3.1 退货匹配）
-- **MySQL 8.0 Reference Manual**：窗口函数、JSON 函数、执行计划（EXPLAIN ANALYZE）的精确语义
-- **某篇博客**：（如果你参考了具体的博客，请贴链接）
+- **MySQL 8.0 Reference Manual**：窗口函数语义、`max_execution_time`、元数据锁文档（Q2.4 排障时的行为确认）
+- **Pandas 官方文档**：`Categorical` 处理、`string` dtype、`groupby` 聚合语义（Q1 与 Q3）
+- **智谱开放平台 API 文档**：OpenAI 兼容端点、模型限速与计费说明（Q4 模型选型）
+- **DeepSeek 定价页**：影子成本折算基准（Q4 cost_report 与 Q5 成本估算）
 
 ---
 
@@ -108,16 +121,12 @@
 
 ### 你做过的最重要的工具选型决策是？为什么？
 
-例如："Q2 强制 MySQL，我在 Q2.4 优化题里对 `orders.order_purchase_timestamp` 加了组合索引并把 `LOWER(c.customer_city) LIKE '%sao%'` 改写成不依赖函数的形式，把执行时间从 X 秒降到 Y 秒"
-
-（请填写）
+Q4 的模型选型。约束是 $3 预算加 1 万条级流量，GPT-4o 全量约 $18.5 直接出局，GPT-4o-mini 约 $1.1 可行但有网络门槛。最终选 glm-4-flash 免费档，把预算问题转化为时间问题（免费限速下 2.83 小时）。这个决策的价值在于它后来反哺了 Q5：Q5 的 LLM 成本估算全部建立在 Q4 实测的 token 消耗上，输出占八成的结论直接决定了"输出压缩优先于分流"的优化排序。
 
 ### 你尝试过但**放弃**的工具/方案？
 
-> 这能体现你的判断力
-
-（请填写）
+三处，各有原因。Gemini Flash 免费档，限速 1,500 请求/天，1 万条要跑一周，直接排除。SQLite，题面禁止，未尝试。Q2.4 的"重写 SQL 优化"，在 TEXT 裸表上跑 61 分钟未出结果后放弃改写路线，转向类型化 schema，这个放弃比坚持更有价值。另外 Q3 匹配率 91.6% 的版本被我主动回退，理由是它包含了 498 行匹配到未来订单的错误结果，修复后 88.8% 才是可信数字。
 
 ### 如果再做一次，你会换用什么工具？
 
-（请填写）
+Q2 灌库会改用 `LOAD DATA INFILE`，`to_sql` 逐批插入 155 万行耗时偏长，且产出的全 TEXT 表为后续埋了类型债。Q4 如果重做，我会直接实现批量加 id 对齐的方案，跳过按序对齐的弯路（试跑失败率 17% 那一版）。单元测试会引入 pytest 为 Q3 匹配函数构造边界用例，本卷的验证依赖全量运行加人工抽查，回归成本偏高。
