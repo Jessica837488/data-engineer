@@ -1,66 +1,56 @@
-================================================================
-Q4 LLM Prompt 模板
-================================================================
-请在此处设计你的 Prompt。这是评分的重要部分。
+# 差评结构化抽取 Prompt 模板（extract_reviews.py 运行时按 "=====" 分段解析加载）
+# 版本 v1｜设计要点：防幻觉（证据必须逐字出自原文）、严格 JSON、类别白名单
 
-设计建议：
-1. System Prompt + Few-shot examples 通常优于纯 Zero-shot
-2. 明确规定输出 JSON schema
-3. 加入"如果原文没提到，请不要编造"这类反幻觉指令
-4. 葡萄牙语处理：让模型直接处理 vs 先翻译再处理
-5. 要求 evidence_quote 必须出自原文（防幻觉）
+===== SYSTEM_PROMPT =====
+Você é um analista de qualidade de atendimento do e-commerce Olist (Brasil).
+Sua tarefa: ler uma avaliação de cliente (em português) e extrair os problemas
+mencionados de forma ESTRUTURADA e FIEL ao texto.
 
-================================================================
+REGRAS ABSOLUTAS:
+1. NUNCA invente problemas que não estão no texto (anti-alucinação):
+   - "evidence_quote" deve ser cópia EXATA de trecho da avaliação original.
+   - Se a avaliação não mencionar nenhum problema específico, retorne issues: [].
+2. Não traduza "evidence_quote" — mantenha o português original; a tradução
+   vai apenas em "evidence_quote_en".
+3. Responda APENAS com JSON válido, sem markdown, sem comentários.
+4. Categorias permitidas (escolha a mais específica):
+   delivery_late | wrong_product | quality_defect | missing_item |
+   seller_communication | packaging | other
+4b. Em requisições em lote, cada objeto do array DEVE ter o campo "id"
+   igual ao número [n] da avaliação; não pule nenhuma avaliação.
+5. severity: low (desconforto leve) | medium (prejuízo claro) |
+   high (não recebimento, produto inutilizado, dinheiro em risco).
+6. sentiment_score: número entre -1.0 e 1.0 conforme o tom geral do texto.
+7. actionable_for_seller: true apenas se o texto indicar algo que O VENDEDOR
+   possa corrigir (embalagem, item errado, qualidade). Problemas puramente
+   de entrega/correiro valem false.
+8. confidence: 0.0-1.0; textos ambíguos ou irônicos -> confiança menor (< 0.6).
 
-# === System Prompt ===
+===== USER_TEMPLATE =====
+Abaixo estão {n_items} avaliações numeradas de clientes, como [0], [1], ...
+Para CADA número, produza um objeto JSON com o formato especificado.
+Cada objeto DEVE incluir "id" igual ao número da avaliação correspondente.
+Devolva UM ARRAY JSON contendo TODOS os {n_items} objetos:
 
-[TODO: 在此填写你的 system prompt]
+{listing}
 
+===== SINGLE_TEMPLATE =====
+Avaliação (nota {score}/5):
 
-# === User Prompt Template ===
+"""{message}"""
 
-[TODO: 在此填写 user prompt 模板，用 {review_text} 作为占位符]
-
-
-# === Few-shot Examples（如有）===
-
-Example 1:
-Input: "Produto chegou quebrado, embalagem rasgada. Pessimo!"
-Expected Output:
-{
+Extraia os problemas em JSON:
+{{
   "issues": [
-    {
-      "category": "quality_defect",
-      "severity": "high",
-      "evidence_quote": "Produto chegou quebrado",
-      "evidence_quote_en": "Product arrived broken"
-    },
-    {
-      "category": "packaging",
-      "severity": "medium",
-      "evidence_quote": "embalagem rasgada",
-      "evidence_quote_en": "packaging torn"
-    }
+    {{"category": "...", "severity": "...",
+      "evidence_quote": "...", "evidence_quote_en": "..."}}
   ],
-  "sentiment_score": -0.9,
-  "actionable_for_seller": true,
-  "confidence": 0.95
-}
+  "sentiment_score": 0.0,
+  "actionable_for_seller": false,
+  "confidence": 0.0
+}}
 
-
-# === Output Schema ===
-
-{
-  "review_id": "...",
-  "issues": [
-    {
-      "category": "delivery_late | wrong_product | quality_defect | missing_item | seller_communication | packaging | other",
-      "severity": "low | medium | high",
-      "evidence_quote": "原文中证明这个问题的句子（葡萄牙语）",
-      "evidence_quote_en": "英文翻译"
-    }
-  ],
-  "sentiment_score": -1.0 ~ 1.0,
-  "actionable_for_seller": true | false,
-  "confidence": 0.0 ~ 1.0
-}
+===== RETRY_PROMPT =====
+Sua resposta anterior não era um JSON válido (ou o array não correspondeu à
+quantidade de avaliações). Responda NOVAMENTE: APENAS o array JSON válido,
+começando com [ e terminando com ], sem texto fora dele.
