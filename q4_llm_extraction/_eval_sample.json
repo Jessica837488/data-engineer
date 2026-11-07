@@ -1,0 +1,732 @@
+[
+ {
+  "review_id": "ae6773f1b360f1c6369bfe4cb2df6fea",
+  "order_id": "553379bf1f6c95489ae135f97327fd91",
+  "review_score": 2,
+  "message": "Não recebi o produto até o momento e nenhum contato avisando o motivo",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "delivery_late",
+     "severity": "high",
+     "evidence_quote": "Não recebi",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.4
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "delivery_late 正确；另漏了 seller_communication（nenhum contato）；sentiment 应为负"
+  }
+ },
+ {
+  "review_id": "10b070189f574f8610a1adfdcbb0c0c7",
+  "order_id": "bf122b1684abe6417e2e2eb2ababa7b9",
+  "review_score": 1,
+  "message": "Não recebi o produto ainda!!! ",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "missing_item",
+     "severity": "high",
+     "evidence_quote": "Não recebi o produto ainda",
+     "evidence_quote_en": "I have not received the product yet"
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": false,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "应 delivery_late 而非 missing_item（未收到≠缺件）"
+  }
+ },
+ {
+  "review_id": "4a3ee26dbf183679868310fcb72ade3d",
+  "order_id": "80d9047477928cfb4cf319c2d04004e6",
+  "review_score": 1,
+  "message": "Produto não atendeu as expectativas",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "quality_defect",
+     "severity": "high",
+     "evidence_quote": "Produto não atendeu as expectativas",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": false,
+   "evidence_faithful": true,
+   "note": "quality_defect 可接受但 severity 高了（模糊不满应 medium）"
+  }
+ },
+ {
+  "review_id": "c00de1d9863f772799e058e85ec044f3",
+  "order_id": "391547bd36c3568e53de7b7db15ede21",
+  "review_score": 2,
+  "message": "Entrega de produto errado, comprei tapete para carro Ettios Rech modelo 2017, veio modelo Corolla",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "wrong_product",
+     "severity": "high",
+     "evidence_quote": "produto errado",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.4
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": ""
+  }
+ },
+ {
+  "review_id": "354e511cee0f8cad709ab2f5c01f40a1",
+  "order_id": "2f7cfcddaa1f9b24454e42d7fb54944e",
+  "review_score": 3,
+  "message": "Estou dando três estrelas porque não usei o aparelho só teste.i",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "other",
+     "severity": "low",
+     "evidence_quote": "Estou dando três estrelas porque não usei o aparelho só teste.i",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "other 可接受，理想应为空 issues"
+  }
+ },
+ {
+  "review_id": "7f6fa9d9dbd9d037c2c31af32792f622",
+  "order_id": "eee612addb28b4837f3a8d9ce54e31f8",
+  "review_score": 1,
+  "message": "Empresa targaryen, vende o produto e não entende nada sobre ele.Manda procurar uma fonoaudióloga.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "seller_communication",
+     "severity": "high",
+     "evidence_quote": "Empresa targaryen, vende o produto e não entende nada sobre ele.Manda procurar uma fonoaudióloga.",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "actionable 应为 true（漏标）"
+  }
+ },
+ {
+  "review_id": "eb1cb58ea4c18551d25ef718bc10f755",
+  "order_id": "bf43f434abcaa2f045548a0592ee5e3c",
+  "review_score": 2,
+  "message": "Produto solto dentro de uma caixa de papelão sem nenhum tipo de enchimento amortecedor ou protetor. Felizmente não sofreu danos, mas deixou a desejar no aspecto embalagem.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "packaging",
+     "severity": "medium",
+     "evidence_quote": "Produto solto dentro de uma caixa de papelão sem nenhum tipo de enchimento amortecedor ou protetor.",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "actionable 应为 true（漏标）"
+  }
+ },
+ {
+  "review_id": "bd18d38a13ec1f63d28aa6206da888b9",
+  "order_id": "f11e9516ca2b6091b64f2e2ea0ebebb3",
+  "review_score": 1,
+  "message": "Não recebi o pedido no tempo estimado e não fui informada do porque do atraso.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "delivery_late",
+     "severity": "high",
+     "evidence_quote": "Não recebi o pedido no tempo estimado e não fui informada do porque do atraso.",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": ""
+  }
+ },
+ {
+  "review_id": "69b8c3ed30740098f41f03d06ea7c8fb",
+  "order_id": "4748c7d66bbedbf52de84b3bc4cbc482",
+  "review_score": 1,
+  "message": "Eu não gostei. Meu produto não foi entregue ",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "missing_item",
+     "severity": "high",
+     "evidence_quote": "Eu não gostei. Meu produto não foi entregue",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": false,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "应 delivery_late（未送达）而非 missing_item"
+  }
+ },
+ {
+  "review_id": "557c3d422c186f3ab25589afa06c2694",
+  "order_id": "e77d85bec584c36b9558adc732947c76",
+  "review_score": 1,
+  "message": "produto de péssima qualidade, estou aguardando contato para devolução.\r\nO tecido é transparente, mal costurado e não veio nas medidas.\r\nNão condiz com a foto, propaganda enganosa.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "quality_defect",
+     "severity": "high",
+     "evidence_quote": "produto de péssima qualidade, estou aguardando contato para devolução. O tecido é transparente, mal costurado e não veio nas medidas. Não condiz com a foto, propaganda enganosa.",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": ""
+  }
+ },
+ {
+  "review_id": "d82aa6626c634f4366418d4adaccc59d",
+  "order_id": "b8b331821864531800f736e470ad836b",
+  "review_score": 1,
+  "message": "Comprei o relógio e não veio o que eu pedi e tudo indica que ê falsificado. Não gostei. ",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "wrong_product",
+     "severity": "high",
+     "evidence_quote": "Comprei o relógio e não veio o que eu pedi e tudo indica que ê falsificado. Não gostei.",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": ""
+  }
+ },
+ {
+  "review_id": "8ef67c8b45b1275815b34e5e12b5b3cd",
+  "order_id": "774415b72c8f9986307793e527a0670f",
+  "review_score": 3,
+  "message": "Só não dou avaliação maior porque passei pelo desconforto de achar que tinha caído numa fraude, pois recebi a nota fiscal sozinha num dia e só no outro dia recebi o produto.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "other",
+     "severity": "medium",
+     "evidence_quote": "Só não dou avaliação maior porque passei pelo desconforto de achar que tinha caído numa fraude, pois recebi a nota fiscal sozinha num dia e só no outro dia recebi o produto.",
+     "evidence_quote_en": "I only did not give a higher rating because I went through the discomfort of thinking I had fallen into a fraud, because I received the invoice alone on one day and only the next day did I receive the product."
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "拆开发票场景 other 可接受"
+  }
+ },
+ {
+  "review_id": "e3d0b5759bcb4f0cf86a52f8e0c9664f",
+  "order_id": "aeb656e39cc0a83dd545f079f099d7e7",
+  "review_score": 1,
+  "message": "Estou com problemas de pedido. O parceiro não responde, envia pedido errado e não retorna.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "seller_communication",
+     "severity": "high",
+     "evidence_quote": "O parceiro não responde",
+     "evidence_quote_en": "O parceiro não responde"
+    },
+    {
+     "category": "wrong_product",
+     "severity": "high",
+     "evidence_quote": "envia pedido errado",
+     "evidence_quote_en": "envia pedido errado"
+    },
+    {
+     "category": "seller_communication",
+     "severity": "high",
+     "evidence_quote": "não retorna",
+     "evidence_quote_en": "não retorna"
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "三 issue 提取正确，第 1/3 条略重复"
+  }
+ },
+ {
+  "review_id": "c3bad6ace99f286cca63a9dc7b2cb5ef",
+  "order_id": "08ed4f84b1a078202e8da80c8d96dc77",
+  "review_score": 1,
+  "message": "Boa tarde,qdo comprei era cartucho hp 933XL original e veio cartucho desconhecido com tinta.\r\nNo anuncio nao deveriam colocar a embalagem do produto,pois pela foto é que eu queria mas vei o generico.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "wrong_product",
+     "severity": "high",
+     "evidence_quote": "qdo comprei era cartucho hp 933XL original e veio cartucho desconhecido com tinta.",
+     "evidence_quote_en": ""
+    },
+    {
+     "category": "packaging",
+     "severity": "medium",
+     "evidence_quote": "No anuncio nao deveriam colocar a embalagem do produto,pois pela foto é que eu queria mas vei o generico.",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": false,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "第 1 条 wrong_product 正确；第 2 条应为 other/广告误导，packaging 错"
+  }
+ },
+ {
+  "review_id": "009629d341a4c26a8d3554c146bf2471",
+  "order_id": "6a5a302850fcda00dc96d742bcb810f2",
+  "review_score": 1,
+  "message": "Passou do prazo.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "delivery_late",
+     "severity": "high",
+     "evidence_quote": "Passou do prazo",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": ""
+  }
+ },
+ {
+  "review_id": "ab8893db52d7864563a6c346e632ed42",
+  "order_id": "8ac618028633e98678ec484cb98a073a",
+  "review_score": 1,
+  "message": "Falta de respeito com o consumidor,primeira e última vez q compro neste site",
+  "source": "llm",
+  "result": {
+   "issues": [],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "空 issues 合理（表述空泛）；sentiment 应为负"
+  }
+ },
+ {
+  "review_id": "6faba0c70369c63f6e99f49c836fe2c9",
+  "order_id": "b5c037cf61074d84c0a994fa0d024064",
+  "review_score": 1,
+  "message": "A loja emitiu a NF com os 2 produtos e tinha apenas 1 Item",
+  "source": "llm",
+  "result": {
+   "issues": [],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": false,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "漏提取：NF 与实物不符 = missing_item"
+  }
+ },
+ {
+  "review_id": "b7d6a79d7ae643bca6ced5d18c337436",
+  "order_id": "2eaa9442b80b5a4698a0635ebbb65dbc",
+  "review_score": 1,
+  "message": "Na imagem está a escova da revlon rosa, totalmente da diferente do que recebi. Comprei por causa da marca e veio uma marca que nem conheço da china.\r\nAinda estou esperando resposta",
+  "source": "llm",
+  "result": {
+   "issues": [],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": false,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "漏提取：wrong_product（假货/发错货）"
+  }
+ },
+ {
+  "review_id": "42a5b34fadf9ea08f22a51c6492212fe",
+  "order_id": "53f3cb0dcdecd62675e235186f24adcf",
+  "review_score": 1,
+  "message": "Não entregou até agora,éo correio fala que não tinha ninguém pra recebe ",
+  "source": "llm",
+  "result": {
+   "issues": [],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": false,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "漏提取：delivery_late"
+  }
+ },
+ {
+  "review_id": "4a9afdea5368328d6e1037878ee69d64",
+  "order_id": "ad286e926f0a816e7b604bd0c9db8b1c",
+  "review_score": 1,
+  "message": "O problema não é com a loja mais sim com o produto tem que deixar carregando o dia inteiro pra ouvir meia hora de música e não funciona enquanto carrega desliga sozinho. ",
+  "source": "llm",
+  "result": {
+   "issues": [],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": false,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "漏提取：quality_defect（电池差）"
+  }
+ },
+ {
+  "review_id": "d58200126c0bf590dc700981bd662b68",
+  "order_id": "e6c487a027692996435c701644f98080",
+  "review_score": 3,
+  "message": "Muito bom!",
+  "source": "rule",
+  "result": {
+   "issues": [],
+   "sentiment_score": 0.5,
+   "actionable_for_seller": false
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "矛盾样本（3 分写好评）规则处理正确"
+  }
+ },
+ {
+  "review_id": "d54fba66ce0ba0004bcdf58476d5f51b",
+  "order_id": "6e1af4e0d4cf82af38671a14b609634c",
+  "review_score": 2,
+  "message": "nao recebi o produto",
+  "source": "rule",
+  "result": {
+   "issues": [
+    {
+     "category": "delivery_late",
+     "severity": "high",
+     "evidence_quote": "Não recebi o produto",
+     "evidence_quote_en": "I did not receive the product"
+    }
+   ],
+   "sentiment_score": -0.8,
+   "actionable_for_seller": false
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": false,
+   "note": "规则层输出规范拼写 Não，非逐字（原文 nao）"
+  }
+ },
+ {
+  "review_id": "26d94cc7d675c1a555ec02e0c641cf14",
+  "order_id": "9105f342ad7620f549169ab82c176b1e",
+  "review_score": 1,
+  "message": "ruim",
+  "source": "rule",
+  "result": {
+   "issues": [
+    {
+     "category": "other",
+     "severity": "medium",
+     "evidence_quote": "Ruim",
+     "evidence_quote_en": "Bad"
+    }
+   ],
+   "sentiment_score": -0.7,
+   "actionable_for_seller": false
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": ""
+  }
+ },
+ {
+  "review_id": "4a3d21671504542fb9c3623816e0e380",
+  "order_id": "7f4980f2f2a103ba40fe45341a490ff5",
+  "review_score": 3,
+  "message": "Bom",
+  "source": "rule",
+  "result": {
+   "issues": [],
+   "sentiment_score": 0.3,
+   "actionable_for_seller": false
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": ""
+  }
+ },
+ {
+  "review_id": "18b88e111929bd2167c44214bbf8854c",
+  "order_id": "e6152cd6ca627fc4f0f5deddea24f7c2",
+  "review_score": 1,
+  "message": "Nao recebi o produto",
+  "source": "rule",
+  "result": {
+   "issues": [
+    {
+     "category": "delivery_late",
+     "severity": "high",
+     "evidence_quote": "Não recebi o produto",
+     "evidence_quote_en": "I did not receive the product"
+    }
+   ],
+   "sentiment_score": -0.8,
+   "actionable_for_seller": false
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": false,
+   "note": "同 22：规范拼写非逐字"
+  }
+ },
+ {
+  "review_id": "956ea0e8090689880d6a6b4a3ea2f9d7",
+  "order_id": "b54b301e4b2333df9c1e34a99ae270ee",
+  "review_score": 3,
+  "message": null,
+  "source": "no_text",
+  "result": {
+   "issues": [],
+   "sentiment_score": -0.6,
+   "actionable_for_seller": false,
+   "confidence": 1.0
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "无文本占位，sentiment 按评分推定"
+  }
+ },
+ {
+  "review_id": "b3a8be23dd1269e976814e9dd8b2b27f",
+  "order_id": "fce6ebf0ce28cde1c71f1f4160c8e4b5",
+  "review_score": 1,
+  "message": "Estou muito chateado pois ainda não recebi e não tenho nenhuma satisfação a respeito, se vcs não resolverem logo com o envio viu procurar meus direitos pois já paguei.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "delivery_late",
+     "severity": "high",
+     "evidence_quote": "Estou muito chateado pois ainda não recebi e não tenho nenhuma satisfação a respeito, se vcs não resolverem logo com o envio viu procurar meus direitos pois já paguei.",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": ""
+  }
+ },
+ {
+  "review_id": "436ebfdd9689161f8fb005d7e5c0ef50",
+  "order_id": "bf2f7a16704936db1686ba2711614520",
+  "review_score": 3,
+  "message": "O produto foi entregue dentro do prazo estabelecido. Utiliza uma bateria LR44 mas já contém 1 na embalagem (comprei 3 por R$ 10).\r\nCaptação excelente e cabo muito longo.",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "missing_item",
+     "severity": "medium",
+     "evidence_quote": "já contém 1 na embalagem (comprei 3 por R$ 10)",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": false,
+   "severity_correct": false,
+   "evidence_faithful": false,
+   "note": "误提取：'já contém 1 na embalagem' 是好评（电池已含），missing_item 为幻觉"
+  }
+ },
+ {
+  "review_id": "993b7320ffc5616675a2014cba0ead62",
+  "order_id": "9d27b66cd7dfe58587bd778c83c4d5a1",
+  "review_score": 3,
+  "message": "O frete foi pago e tive que buscar o produto nos correios o que eh um absurdo ",
+  "source": "llm",
+  "result": {
+   "issues": [],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": false,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": "漏提取：需自提且已付运费（delivery 相关）"
+  }
+ },
+ {
+  "review_id": "1ee0d945196c3da670782b7a26b5be2b",
+  "order_id": "e5dfa353d229de8b9a6e25cda9b03130",
+  "review_score": 1,
+  "message": "Já solicitei a troca , pois o produto vendido pela loja não é idôneo",
+  "source": "llm",
+  "result": {
+   "issues": [
+    {
+     "category": "quality_defect",
+     "severity": "high",
+     "evidence_quote": "o produto vendido pela loja não é idôneo",
+     "evidence_quote_en": ""
+    }
+   ],
+   "sentiment_score": 0.0,
+   "actionable_for_seller": false,
+   "confidence": 0.5
+  },
+  "_human_label": {
+   "category_correct": true,
+   "severity_correct": true,
+   "evidence_faithful": true,
+   "note": ""
+  }
+ }
+]

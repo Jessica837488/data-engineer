@@ -1,0 +1,18 @@
+{
+ "usage": {
+  "input_tokens": 1065666,
+  "output_tokens": 1583246,
+  "requests": 1030,
+  "single_retries": 188
+ },
+ "real_cost_usd": 0.0,
+ "shadow_cost_usd": 2.0293,
+ "records": 22754,
+ "rule": 257,
+ "llm": 14190,
+ "fallback": 0,
+ "no_text": 8307,
+ "halluc_evidence_dropped": 370,
+ "rule_rescued": 821,
+ "elapsed_sec": 10188.4
+}
